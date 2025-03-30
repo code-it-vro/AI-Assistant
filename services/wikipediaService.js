@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 
-async function searchWikipedia(query, maxLines = 8) {
+async function searchWikipedia(query, maxLines = 3) {
   try {
     const apiURL = "https://en.wikipedia.org/w/api.php";
     const response = await axios.get(apiURL, {
