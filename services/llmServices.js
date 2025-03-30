@@ -14,7 +14,7 @@ async function getResponse(prompt) {
       messages: [
         {
           role: "user",
-          content: `${prompt}\n\Please provide a concise summary in just 1 sentence`,
+          content: `${prompt}\n\Please provide a concise summary in just 2 sentence`,
         },
       ],
       max_tokens: 100,

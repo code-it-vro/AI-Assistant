@@ -1,0 +1,329 @@
+/* Modern Virtual Assistant UI - index.css */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #f3f4f6;
+  --text-color: #1f2937;
+  --light-text: #6b7280;
+  --accent-color: #a855f7;
+  --danger-color: #ef4444;
+  --success-color: #10b981;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --transition: all 0.2s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #ebeff2;
+  color: var(--text-color);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.assistant-container {
+  width: 100%;
+  max-width: 600px;
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  height: 600px; /* Fixed height to keep it constant */
+  min-height: 600px; /* Prevents shrinking */
+  max-height: 600px; /* Prevents growing */
+  flex-shrink: 0; /* Ensures it never shrinks */
+}
+
+.output-box {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  height: 250px; /* Strict height */
+  min-height: 250px; /* Prevents shrinking */
+  max-height: 250px; /* Prevents growing */
+  overflow-y: auto; /* Enables scrolling */
+  white-space: pre-wrap;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  border: 1px solid #e5e7eb;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+
+.assistant-header {
+  display: flex;
+  flex-direction: column;  /* Changed from row to column */
+  align-items: center;     /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  gap: 0.75rem;            /* Reduced gap slightly */
+  margin-bottom: 1rem;
+  text-align: center;      /* Center text */
+}
+.assistant-header-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.assistant-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.25rem; /* Add small margin to separate from subtitle */
+}
+
+.assistant-subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--light-text);
+  text-align: center;
+  max-width: 90%; /* Ensure it doesn't get too wide */
+  line-height: 1.4;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+  /* Fixed height to prevent layout shifts */
+  min-height: 50px;
+}
+
+.speak-btn, .stop-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  /* Fixed height to prevent button size changes */
+  height: 50px;
+}
+
+.speak-btn {
+  background-color: var(--primary-color);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.speak-btn:hover, .speak-btn:focus {
+  background-color: var(--primary-hover);
+}
+
+.speak-btn:active {
+  transform: scale(0.98);
+}
+
+.stop-btn {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.stop-btn:hover, .stop-btn:focus {
+  background-color: #e5e7eb;
+}
+
+.stop-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+
+/* Status indicators container with fixed height */
+.status-container {
+  height: 30px;
+  margin-bottom: 0.5rem;
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.listening-indicator {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-color);
+}
+
+.speaking-indicator {
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary-color);
+}
+
+/* Use opacity for transitions instead of adding/removing elements */
+.status-indicator {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+}
+
+.status-indicator.active {
+  opacity: 1;
+}
+
+/* Pulse animation for listening state without moving elements */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+.listening .speak-btn {
+  animation: pulse 1.5s infinite;
+  /* Don't change size during animation */
+  transform: none !important;
+}
+
+/* Button text fades instead of jumping */
+.button-text {
+  position: absolute;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.button-text.active {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .assistant-container {
+    padding: 1.5rem;
+    gap: 1rem;
+    min-height: 450px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    min-height: 110px;
+  }
+  
+  .speak-btn, .stop-btn {
+    width: 100%;
+  }
+  
+  .output-box {
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    padding: 1rem;
+  }
+  
+  .assistant-subtitle {
+    max-width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+/* Wave animation background */
+.wave-bg {
+  position: absolute;
+  width: 100%;
+  height: 8px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--accent-color),
+    var(--primary-color)
+  );
+  background-size: 200% 100%;
+  animation: wave 3s linear infinite;
+  z-index: 0;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Scrollbar styling */
+.output-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output-box::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.output-box::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+  border-radius: 10px;
+}
+
+.output-box::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Loading dots animation for listening state */
+@keyframes loadingDots {
+  0%, 20% {
+    content: ".";
+  }
+  40% {
+    content: "..";
+  }
+  60%, 100% {
+    content: "...";
+  }
+}
+
+.listening-dots::after {
+  content: "";
+  animation: loadingDots 1.5s infinite;
+}
