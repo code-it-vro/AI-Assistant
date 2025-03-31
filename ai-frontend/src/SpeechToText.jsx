@@ -102,7 +102,7 @@ function SpeechToText() {
         <div className="assistant-header-icon">AI</div>
         <h1 className="assistant-title">Your Own AI-Assistant</h1>
         <h2 className="assistant-subtitle">
-          Your AI-powered assistant—open apps, fetch news, and hear responses
+          Your AI-powered assistant—open apps like Youtube , Instagram etc..  fetch news, and hear responses
           aloud, all hands-free!"
         </h2>
       </div>
