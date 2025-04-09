@@ -79,7 +79,9 @@ export async function virtualAssistant(req, res) {
        if (newsData && newsData.length > 0) {
          console.log(newsData[1].title);
          if (!shouldStopSpeaking) await say.speak(newsData[1].title);
-         res.status(200).json({ message: newsData[1].title });
+         res
+           .status(200)
+           .json({ message: newsData[1].title + newsData[2].title + newsData[3].title });
        } else {
          res.status(400).json({ message: "unable to process your query." });
        }
